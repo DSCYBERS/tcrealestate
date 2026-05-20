@@ -76,7 +76,7 @@ function PropertyDetail() {
               <div className="mt-8">
                 <h2 className="text-lg font-bold">Key Highlights</h2>
                 <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-                  {p.highlights.map((h) => (
+                  {p.highlights.map((h: string) => (
                     <li key={h} className="flex items-center gap-2 text-sm">
                       <CheckCircle2 className="w-5 h-5 text-primary" /> {h}
                     </li>
