@@ -87,7 +87,7 @@ function LocationPage() {
           <div>
             <h3 className="text-lg font-bold">Key Highlights</h3>
             <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-              {loc.highlights.map((h) => (
+              {loc.highlights.map((h: string) => (
                 <li key={h} className="flex items-center gap-2 text-sm">
                   <CheckCircle2 className="w-5 h-5 text-primary" /> {h}
                 </li>
@@ -97,7 +97,7 @@ function LocationPage() {
           <div>
             <h3 className="text-lg font-bold">Why Invest</h3>
             <ul className="mt-3 grid sm:grid-cols-2 gap-3">
-              {loc.whyInvest.map((w) => (
+              {loc.whyInvest.map((w: string) => (
                 <li key={w} className="bg-card border border-border rounded-lg p-4 text-sm">{w}</li>
               ))}
             </ul>
@@ -105,7 +105,7 @@ function LocationPage() {
           <div>
             <h3 className="text-lg font-bold">Nearby Landmarks</h3>
             <div className="mt-3 flex flex-wrap gap-2">
-              {loc.nearby.map((n) => (
+              {loc.nearby.map((n: string) => (
                 <span key={n} className="inline-flex items-center gap-1 bg-secondary text-foreground border border-border px-3 py-1.5 rounded-full text-xs">
                   <MapPin className="w-3 h-3 text-primary" /> {n}
                 </span>

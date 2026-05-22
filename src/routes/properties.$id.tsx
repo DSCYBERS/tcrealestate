@@ -11,7 +11,7 @@ export const Route = createFileRoute("/properties/$id")({
     if (!property) throw notFound();
     return { property };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, params }) => {
     const p = loaderData?.property;
     const title = p ? `${p.name} — TC Real Estates` : "Property — TC Real Estates";
     const desc = p ? `${p.name} in ${p.location} — ${p.size}. ${p.description}` : "Property details";
@@ -21,8 +21,29 @@ export const Route = createFileRoute("/properties/$id")({
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
+        { property: "og:type", content: "product" },
         ...(p ? [{ property: "og:image", content: p.image }] : []),
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(p ? [{ name: "twitter:image", content: p.image }] : []),
       ],
+      links: [{ rel: "canonical", href: `/properties/${params.id}` }],
+      scripts: p ? [{
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: p.name,
+          description: p.description,
+          image: p.image,
+          category: p.type,
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "INR",
+            price: p.totalPrice,
+            availability: "https://schema.org/InStock",
+          },
+        }),
+      }] : [],
     };
   },
   notFoundComponent: () => (
