@@ -32,7 +32,7 @@ function Index() {
         </div>
         <div className="relative">
           <SiteHeader transparent />
-          <div className="max-w-7xl mx-auto px-6 pt-10 pb-24 grid lg:grid-cols-2 gap-10">
+          <div className="max-w-7xl mx-auto px-6 pt-28 pb-24 grid lg:grid-cols-2 gap-10">
             <div>
               <span className="inline-block text-[11px] tracking-widest bg-secondary text-primary font-semibold px-3 py-1.5 rounded">
                 LIMITED TIME OPPORTUNITY
