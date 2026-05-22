@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User, Phone, Lock, MessageCircle } from "lucide-react";
 import { waLink } from "@/lib/properties";
+import { saveLead } from "@/lib/leads";
 
 export function LeadForm({
   title = "GET BEST DEALS",
@@ -14,6 +15,13 @@ export function LeadForm({
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    saveLead({
+      name: name.trim(),
+      phone: phone.trim(),
+      requirement: req,
+      location: loc,
+      source: defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
+    });
     const msg = `Hi, I'm interested in TC Real Estates.${defaultPropertyId ? `\nProperty: ${defaultPropertyId}` : ""}\nName: ${name}\nPhone: ${phone}\nRequirement: ${req}\nLocation: ${loc}`;
     window.open(waLink(msg), "_blank");
   };
