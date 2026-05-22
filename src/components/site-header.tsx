@@ -5,17 +5,17 @@ import { waLink } from "@/lib/properties";
 
 function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2">
-      <div className="bg-brand-yellow text-brand-dark font-extrabold text-lg w-11 h-11 flex items-center justify-center rounded-sm">
+    <Link to="/" className="flex items-center gap-2.5">
+      <div className="bg-brand-yellow text-brand-dark font-extrabold text-lg w-11 h-11 flex items-center justify-center rounded-sm shrink-0">
         TC
       </div>
-      <div className="leading-tight">
-        <div className={`font-extrabold tracking-tight text-lg ${light ? "text-white" : "text-foreground"}`}>
+      <div className="flex flex-col leading-none">
+        <span className={`font-extrabold tracking-tight text-lg ${light ? "text-white" : "text-foreground"}`}>
           REAL <span className="text-primary">ESTATES</span>
-        </div>
-        <div className={`text-[10px] tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}>
+        </span>
+        <span className={`mt-1 text-[9px] tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}>
           LAND. HOMES. INVESTMENTS.
-        </div>
+        </span>
       </div>
     </Link>
   );
