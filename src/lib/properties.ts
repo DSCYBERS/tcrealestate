@@ -104,7 +104,7 @@ export const properties: Property[] = [
   },
 ];
 
-export const WHATSAPP_NUMBER = "919351699808";
-export const PHONE_NUMBER = "+91 93516 99808";
+export const WHATSAPP_NUMBER = "919313787896";
+export const PHONE_NUMBER = "+91 93137 87896";
 export const waLink = (msg = "Hi, I'm interested in TC Real Estates properties.") =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
