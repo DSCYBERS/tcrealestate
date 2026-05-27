@@ -95,13 +95,16 @@ export function SiteFooter() {
           <h4 className="text-white font-bold mb-4 text-xs tracking-widest">CONTACT US</h4>
           <ul className="space-y-3 text-xs">
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-primary" /> {PHONE_NUMBER}
+              <Phone className="w-4 h-4 text-primary" />
+              <span>{PHONE_NUMBER}</span>
             </li>
             <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-primary" /> info@tcrealestates.in
+              <Mail className="w-4 h-4 text-primary" />
+              <span>info@tcrealestates.in</span>
             </li>
             <li className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-primary" /> Ahmedabad, Gujarat
+              <MapPin className="w-4 h-4 text-primary" />
+              <span>Ahmedabad, Gujarat</span>
             </li>
           </ul>
         </div>

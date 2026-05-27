@@ -13,10 +13,41 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "TC Real Estates — Premium Plots in Ahmedabad" },
-      { name: "description", content: "Invest in verified, high-ROI residential, commercial and industrial plots across Ahmedabad — Sanand, Changodar, Bavla, Dholera." },
-      { property: "og:title", content: "TC Real Estates — Premium Plots in Ahmedabad" },
-      { property: "og:description", content: "Land. Homes. Investments. Trusted plot deals across Ahmedabad." },
+      { title: "Premium Plots & Land for Sale in Ahmedabad | TC Real Estates" },
+      { name: "description", content: "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market. Contact TC Real Estates today." },
+      { name: "keywords", content: "plots in Ahmedabad, land for sale Ahmedabad, Sanand plots, Changodar property, Dholera investment, Bavla land, industrial plots Gujarat, TC Real Estates" },
+      { property: "og:title", content: "Premium Plots & Land for Sale in Ahmedabad | TC Real Estates" },
+      { property: "og:description", content: "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://tcrealestate.lovable.app/" },
+      { property: "og:site_name", content: "TC Real Estates" },
+      { property: "og:image", content: "https://tcrealestate.lovable.app/og-home.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "TC Real Estates — Premium Plots in Ahmedabad" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Premium Plots & Land for Sale in Ahmedabad | TC Real Estates" },
+      { name: "twitter:description", content: "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market." },
+      { name: "twitter:image", content: "https://tcrealestate.lovable.app/og-home.jpg" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://tcrealestate.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "TC Real Estates",
+          url: "https://tcrealestate.lovable.app/",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "https://tcrealestate.lovable.app/properties?search={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
     ],
   }),
 });
