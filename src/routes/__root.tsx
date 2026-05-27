@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "TC Real Estates",
         areaServed: "Ahmedabad, Gujarat, India",
         url: "https://tcrealestate.lovable.app/",
-        telephone: "+91-93516-99808",
+        telephone: "+91-93137-87896",
       }),
     }],
   }),
