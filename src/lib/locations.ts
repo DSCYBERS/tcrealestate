@@ -84,6 +84,23 @@ export const locations: LocationPage[] = [
     ],
     nearby: ["Dholera Expressway", "Upcoming Intl. Airport", "Bhavnagar", "Ahmedabad (~90km)"],
   },
+  {
+    slug: "narol",
+    name: "Narol",
+    tagline: "Strategic South Ahmedabad commercial & residential hub",
+    hero: plotChangodar,
+    startingPrice: "22,000 / Sq.Yd",
+    intro:
+      "Narol is South Ahmedabad's most active commercial corridor — connecting the city to Vatva GIDC, Naroda and the Ahmedabad-Vadodara Expressway, making it a premium pick for commercial and residential investment.",
+    highlights: ["Expressway access", "Commercial zone", "High footfall area", "Title clear plots"],
+    whyInvest: [
+      "Direct Ahmedabad-Vadodara Expressway access",
+      "Booming commercial & retail demand",
+      "Surrounded by industrial belts",
+      "Steady year-on-year appreciation",
+    ],
+    nearby: ["Narol Circle", "Vatva GIDC", "Ahmedabad-Vadodara Expressway", "Isanpur", "Lambha"],
+  },
 ];
 
 export const getLocation = (slug: string) => locations.find((l) => l.slug === slug);
