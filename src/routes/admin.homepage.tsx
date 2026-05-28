@@ -20,7 +20,7 @@ function HomepageAdmin() {
   useEffect(() => {
     (async () => {
       const { data } = await supabase.from("site_content").select("*").in("key", ["hero", "contact", "seo_home"]);
-      const map = Object.fromEntries((data ?? []).map((r) => [r.key, r.value]));
+      const map = Object.fromEntries((data ?? []).map((r) => [r.key, r.value])) as Record<string, SiteContent>;
       setHero(map.hero ?? {}); setContact(map.contact ?? {}); setSeo(map.seo_home ?? {});
       setLoading(false);
     })();
