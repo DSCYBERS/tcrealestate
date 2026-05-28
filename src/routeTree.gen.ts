@@ -13,11 +13,18 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as InvestorsRouteImport } from './routes/investors'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
 import { Route as LocationsSlugRouteImport } from './routes/locations.$slug'
-import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminTestimonialsRouteImport } from './routes/admin.testimonials'
+import { Route as AdminPropertiesRouteImport } from './routes/admin.properties'
+import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
+import { Route as AdminHomepageRouteImport } from './routes/admin.homepage'
+import { Route as AdminBlogRouteImport } from './routes/admin.blog'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -39,6 +46,16 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -48,6 +65,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const PropertiesIdRoute = PropertiesIdRouteImport.update({
   id: '/$id',
@@ -59,90 +81,151 @@ const LocationsSlugRoute = LocationsSlugRouteImport.update({
   path: '/locations/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminLeadsRoute = AdminLeadsRouteImport.update({
-  id: '/admin/leads',
-  path: '/admin/leads',
-  getParentRoute: () => rootRouteImport,
+const AdminTestimonialsRoute = AdminTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPropertiesRoute = AdminPropertiesRouteImport.update({
+  id: '/properties',
+  path: '/properties',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLocationsRoute = AdminLocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHomepageRoute = AdminHomepageRouteImport.update({
+  id: '/homepage',
+  path: '/homepage',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/leads': typeof AdminLeadsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/leads': typeof AdminLeadsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin/leads': typeof AdminLeadsRoute
+  '/admin/blog': typeof AdminBlogRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
+    | '/auth'
     | '/contact'
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
-    | '/admin/leads'
+    | '/admin/blog'
+    | '/admin/homepage'
+    | '/admin/locations'
+    | '/admin/properties'
+    | '/admin/testimonials'
     | '/locations/$slug'
     | '/properties/$id'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
-    | '/admin/leads'
+    | '/admin/blog'
+    | '/admin/homepage'
+    | '/admin/locations'
+    | '/admin/properties'
+    | '/admin/testimonials'
     | '/locations/$slug'
     | '/properties/$id'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
+    | '/auth'
     | '/contact'
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
-    | '/admin/leads'
+    | '/admin/blog'
+    | '/admin/homepage'
+    | '/admin/locations'
+    | '/admin/properties'
+    | '/admin/testimonials'
     | '/locations/$slug'
     | '/properties/$id'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   InvestorsRoute: typeof InvestorsRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  AdminLeadsRoute: typeof AdminLeadsRoute
   LocationsSlugRoute: typeof LocationsSlugRoute
 }
 
@@ -176,6 +259,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -189,6 +286,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/properties/$id': {
       id: '/properties/$id'
@@ -204,15 +308,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/leads': {
-      id: '/admin/leads'
-      path: '/admin/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AdminLeadsRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/testimonials': {
+      id: '/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AdminTestimonialsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/properties': {
+      id: '/admin/properties'
+      path: '/properties'
+      fullPath: '/admin/properties'
+      preLoaderRoute: typeof AdminPropertiesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/locations': {
+      id: '/admin/locations'
+      path: '/locations'
+      fullPath: '/admin/locations'
+      preLoaderRoute: typeof AdminLocationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/homepage': {
+      id: '/admin/homepage'
+      path: '/homepage'
+      fullPath: '/admin/homepage'
+      preLoaderRoute: typeof AdminHomepageRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof AdminRoute
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminBlogRoute: typeof AdminBlogRoute
+  AdminHomepageRoute: typeof AdminHomepageRoute
+  AdminLocationsRoute: typeof AdminLocationsRoute
+  AdminPropertiesRoute: typeof AdminPropertiesRoute
+  AdminTestimonialsRoute: typeof AdminTestimonialsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBlogRoute: AdminBlogRoute,
+  AdminHomepageRoute: AdminHomepageRoute,
+  AdminLocationsRoute: AdminLocationsRoute,
+  AdminPropertiesRoute: AdminPropertiesRoute,
+  AdminTestimonialsRoute: AdminTestimonialsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface PropertiesRouteChildren {
   PropertiesIdRoute: typeof PropertiesIdRoute
@@ -229,11 +381,12 @@ const PropertiesRouteWithChildren = PropertiesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   InvestorsRoute: InvestorsRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  AdminLeadsRoute: AdminLeadsRoute,
   LocationsSlugRoute: LocationsSlugRoute,
 }
 export const routeTree = rootRouteImport
