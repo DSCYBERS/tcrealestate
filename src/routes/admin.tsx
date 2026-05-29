@@ -72,7 +72,7 @@ function AdminLayout() {
             const Icon = item.icon;
             return (
               <Link
-                key={item.to} to={item.to}
+                key={item.to} to={item.to as any}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors ${active ? "bg-primary text-primary-foreground font-semibold" : "text-white/80 hover:bg-white/10"}`}
               >
