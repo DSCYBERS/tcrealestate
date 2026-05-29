@@ -17,7 +17,7 @@ export const Route = createFileRoute("/admin")({
   }),
 });
 
-const nav = [
+const nav: { to: string; label: string; icon: any; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/properties", label: "Properties", icon: Building2 },
   { to: "/admin/leads", label: "Leads", icon: Users },
@@ -25,7 +25,7 @@ const nav = [
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/blog", label: "Blog", icon: FileText },
   { to: "/admin/homepage", label: "Homepage & SEO", icon: Settings },
-] as const;
+];
 
 function AdminLayout() {
   const auth = useAuth();

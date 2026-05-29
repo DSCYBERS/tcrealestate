@@ -20,17 +20,17 @@ type LeadRow = {
   location: string | null;
   source: string | null;
   message: string | null;
-  status: "new" | "contacted" | "qualified" | "converted" | "lost";
+  status: "new" | "contacted" | "qualified" | "won" | "lost";
   notes: string | null;
 };
 
-const STATUSES: LeadRow["status"][] = ["new", "contacted", "qualified", "converted", "lost"];
+const STATUSES: LeadRow["status"][] = ["new", "contacted", "qualified", "won", "lost"];
 
 const statusColor: Record<LeadRow["status"], string> = {
   new: "bg-blue-100 text-blue-700",
   contacted: "bg-amber-100 text-amber-700",
   qualified: "bg-purple-100 text-purple-700",
-  converted: "bg-emerald-100 text-emerald-700",
+  won: "bg-emerald-100 text-emerald-700",
   lost: "bg-gray-200 text-gray-700",
 };
 
