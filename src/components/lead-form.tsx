@@ -2,6 +2,7 @@ import { useState } from "react";
 import { User, Phone, Lock, MessageCircle } from "lucide-react";
 import { waLink } from "@/lib/properties";
 import { saveLead } from "@/lib/leads";
+import { saveLeadToSupabase } from "@/lib/supabaseApi";
 
 export function LeadForm({
   title = "GET BEST DEALS",
@@ -22,6 +23,16 @@ export function LeadForm({
       location: loc,
       source: defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
     });
+    // also try to save to supabase when configured
+    try {
+      saveLeadToSupabase({
+        name: name.trim(),
+        phone: phone.trim(),
+        requirement: req,
+        location: loc,
+        source: defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
+      }).catch(() => {});
+    } catch {}
     const msg = `Hi, I'm interested in TC Real Estates.${defaultPropertyId ? `\nProperty: ${defaultPropertyId}` : ""}\nName: ${name}\nPhone: ${phone}\nRequirement: ${req}\nLocation: ${loc}`;
     window.open(waLink(msg), "_blank");
   };

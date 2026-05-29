@@ -9,16 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Admin_rootRouteImport } from './routes/admin/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as InvestorsRouteImport } from './routes/investors'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
 import { Route as LocationsSlugRouteImport } from './routes/locations.$slug'
-import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminPropertiesRouteImport } from './routes/admin/properties'
+import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
 
+const Admin_rootRoute = Admin_rootRouteImport.update({
+  id: '/admin/__root',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -49,6 +56,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropertiesIdRoute = PropertiesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -57,6 +69,11 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
 const LocationsSlugRoute = LocationsSlugRouteImport.update({
   id: '/locations/$slug',
   path: '/locations/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPropertiesRoute = AdminPropertiesRouteImport.update({
+  id: '/admin/properties',
+  path: '/admin/properties',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
@@ -72,9 +89,12 @@ export interface FileRoutesByFullPath {
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof Admin_rootRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,7 +103,9 @@ export interface FileRoutesByTo {
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AdminIndexRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
 }
@@ -95,9 +117,12 @@ export interface FileRoutesById {
   '/investors': typeof InvestorsRoute
   '/properties': typeof PropertiesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/__root': typeof Admin_rootRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/properties': typeof AdminPropertiesRoute
   '/locations/$slug': typeof LocationsSlugRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,9 +133,12 @@ export interface FileRouteTypes {
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
+    | '/admin'
     | '/admin/leads'
+    | '/admin/properties'
     | '/locations/$slug'
     | '/properties/$id'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,7 +147,9 @@ export interface FileRouteTypes {
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
+    | '/admin'
     | '/admin/leads'
+    | '/admin/properties'
     | '/locations/$slug'
     | '/properties/$id'
   id:
@@ -130,9 +160,12 @@ export interface FileRouteTypes {
     | '/investors'
     | '/properties'
     | '/sitemap.xml'
+    | '/admin/__root'
     | '/admin/leads'
+    | '/admin/properties'
     | '/locations/$slug'
     | '/properties/$id'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,12 +175,22 @@ export interface RootRouteChildren {
   InvestorsRoute: typeof InvestorsRoute
   PropertiesRoute: typeof PropertiesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Admin_rootRoute: typeof Admin_rootRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminPropertiesRoute: typeof AdminPropertiesRoute
   LocationsSlugRoute: typeof LocationsSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/admin/__root': {
+      id: '/admin/__root'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof Admin_rootRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -190,6 +233,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/properties/$id': {
       id: '/properties/$id'
       path: '/$id'
@@ -202,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/locations/$slug'
       fullPath: '/locations/$slug'
       preLoaderRoute: typeof LocationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/properties': {
+      id: '/admin/properties'
+      path: '/admin/properties'
+      fullPath: '/admin/properties'
+      preLoaderRoute: typeof AdminPropertiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/leads': {
@@ -233,19 +290,12 @@ const rootRouteChildren: RootRouteChildren = {
   InvestorsRoute: InvestorsRoute,
   PropertiesRoute: PropertiesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Admin_rootRoute: Admin_rootRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminPropertiesRoute: AdminPropertiesRoute,
   LocationsSlugRoute: LocationsSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

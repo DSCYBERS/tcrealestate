@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { MessageCircle, Menu, X } from "lucide-react";
+import { MessageCircle, Menu, X, Settings } from "lucide-react";
 import { useState } from "react";
 import { waLink } from "@/lib/properties";
 
@@ -57,6 +57,13 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
           })}
         </nav>
         <div className="flex items-center gap-2">
+          <Link
+            to="/admin"
+            className="p-2 rounded-md border border-border hover:bg-secondary transition-colors"
+            title="Admin Panel"
+          >
+            <Settings className="w-5 h-5" />
+          </Link>
           <a
             href={waLink()}
             target="_blank"
@@ -87,6 +94,13 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
                 {l.label}
               </Link>
             ))}
+            <Link
+              to="/admin"
+              onClick={() => setOpen(false)}
+              className="text-sm font-medium py-2 text-primary"
+            >
+              Admin Panel
+            </Link>
             <a
               href={waLink()}
               target="_blank"
