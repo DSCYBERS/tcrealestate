@@ -24,7 +24,12 @@ export const locations: LocationPage[] = [
     startingPrice: "18,000 / Sq.Yd",
     intro:
       "Sanand has emerged as one of the most sought-after investment destinations in Ahmedabad — powered by Tata Nano, MG Motors, and large-scale industrial expansion.",
-    highlights: ["Clear title plots", "Near Tata Nano plant", "Approved layouts", "Gated communities"],
+    highlights: [
+      "Clear title plots",
+      "Near Tata Nano plant",
+      "Approved layouts",
+      "Gated communities",
+    ],
     whyInvest: [
       "30%+ appreciation in last 3 years",
       "Direct connectivity to SG Highway & Ring Road",
@@ -75,7 +80,12 @@ export const locations: LocationPage[] = [
     startingPrice: "19,500 / Sq.Yd",
     intro:
       "Dholera Special Investment Region (DSIR) is India's most ambitious smart city project. Early investors stand to gain 3-5x in the coming decade.",
-    highlights: ["Inside DSIR influence zone", "Smart City corridor", "Expressway connectivity", "High future appreciation"],
+    highlights: [
+      "Inside DSIR influence zone",
+      "Smart City corridor",
+      "Expressway connectivity",
+      "High future appreciation",
+    ],
     whyInvest: [
       "Backed by Government of India & Gujarat",
       "Dholera Expressway & International Airport",

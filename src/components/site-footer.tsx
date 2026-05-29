@@ -1,6 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import {
-  Phone, Mail, MapPin, Facebook, Instagram, Youtube, MessageCircle, ChevronRight,
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Youtube,
+  MessageCircle,
+  ChevronRight,
 } from "lucide-react";
 import { PHONE_NUMBER, waLink } from "@/lib/properties";
 
@@ -44,7 +51,8 @@ export function SiteFooter() {
             </div>
           </Link>
           <p className="mt-4 text-xs text-white/60 leading-relaxed">
-            Your trusted partner for verified property and land deals in Ahmedabad and surrounding areas.
+            Your trusted partner for verified property and land deals in Ahmedabad and surrounding
+            areas.
           </p>
           <div className="flex gap-3 mt-4">
             {[Facebook, Instagram, MessageCircle, Youtube].map((Icon, i) => (

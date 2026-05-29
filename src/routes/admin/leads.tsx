@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { getLeads } from '@/lib/adminStorage';
+import React, { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { getLeads } from "@/lib/adminStorage";
 
-export const Route = createFileRoute('/admin/leads')({
+export const Route = createFileRoute("/admin/leads")({
   component: AdminLeads,
 });
 
 function AdminLeads() {
   const [list, setList] = useState<any[]>([]);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     getLeads().then(setList);
@@ -16,30 +16,31 @@ function AdminLeads() {
 
   const filtered = list.filter(
     (l) =>
-      (filter === '' || filter === 'All') ||
-      (filter === 'New' && l.status === 'New') ||
-      (filter === 'Contacted' && l.status === 'Contacted') ||
-      (filter === 'Interested' && l.status === 'Interested') ||
-      (filter === 'Closed' && l.status === 'Closed'),
+      filter === "" ||
+      filter === "All" ||
+      (filter === "New" && l.status === "New") ||
+      (filter === "Contacted" && l.status === "Contacted") ||
+      (filter === "Interested" && l.status === "Interested") ||
+      (filter === "Closed" && l.status === "Closed"),
   );
 
   function downloadCSV() {
-    const headers = ['Date', 'Name', 'Phone', 'Requirement', 'Location', 'Status', 'Source'];
+    const headers = ["Date", "Name", "Phone", "Requirement", "Location", "Status", "Source"];
     const rows = list.map((l) => [
       new Date(l.createdAt).toLocaleString(),
       l.name,
       l.phone,
-      l.requirement ?? '',
-      l.location ?? '',
-      l.status || 'New',
-      l.source ?? '',
+      l.requirement ?? "",
+      l.location ?? "",
+      l.status || "New",
+      l.source ?? "",
     ]);
     const csv = [headers, ...rows]
-      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
-      .join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `tc-leads-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
@@ -61,12 +62,12 @@ function AdminLeads() {
       </header>
 
       <div className="mb-4 flex gap-2">
-        {['All', 'New', 'Contacted', 'Interested', 'Closed'].map((status) => (
+        {["All", "New", "Contacted", "Interested", "Closed"].map((status) => (
           <button
             key={status}
             onClick={() => setFilter(status)}
             className={`px-3 py-1 rounded text-sm ${
-              filter === status ? 'bg-primary text-white' : 'border border-gray-300'
+              filter === status ? "bg-primary text-white" : "border border-gray-300"
             }`}
           >
             {status}
@@ -95,13 +96,17 @@ function AdminLeads() {
                 <td className="px-4 py-2 text-sm">{lead.requirement}</td>
                 <td className="px-4 py-2 text-sm">{lead.location}</td>
                 <td className="px-4 py-2 text-sm">
-                  <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800">{lead.status || 'New'}</span>
+                  <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800">
+                    {lead.status || "New"}
+                  </span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {filtered.length === 0 && <div className="px-4 py-6 text-center text-gray-500">No leads found.</div>}
+        {filtered.length === 0 && (
+          <div className="px-4 py-6 text-center text-gray-500">No leads found.</div>
+        )}
       </div>
     </div>
   );

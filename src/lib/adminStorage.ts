@@ -1,7 +1,7 @@
-import { properties as defaultProperties, type Property } from './properties';
-import { getLeads as getStoredLeads } from './leads';
+import { properties as defaultProperties, type Property } from "./properties";
+import { getLeads as getStoredLeads } from "./leads";
 
-const KEY = 'tc_properties_v1';
+const KEY = "tc_properties_v1";
 
 function readRaw(): Property[] {
   try {
@@ -18,12 +18,12 @@ function write(props: Property[]) {
 }
 
 export async function getProperties(): Promise<Property[]> {
-  if (typeof window === 'undefined') return Promise.resolve([]);
+  if (typeof window === "undefined") return Promise.resolve([]);
   return Promise.resolve(readRaw());
 }
 
 export async function upsertProperty(p: Partial<Property> & { id?: string }): Promise<Property> {
-  if (typeof window === 'undefined') throw new Error('Browser only');
+  if (typeof window === "undefined") throw new Error("Browser only");
   const list = readRaw();
   if (p.id) {
     const idx = list.findIndex((x) => x.id === p.id);
@@ -37,15 +37,15 @@ export async function upsertProperty(p: Partial<Property> & { id?: string }): Pr
     const id = `prop-${Date.now()}`;
     const next: Property = {
       id,
-      name: (p.name as string) || 'Untitled Property',
-      type: (p.type as Property['type']) || 'Residential',
-      location: (p.location as string) || 'Unknown',
-      size: (p.size as string) || '0 Sq. Yd.',
-      pricePerSqYd: (p.pricePerSqYd as string) || '-',
-      totalPrice: (p.totalPrice as string) || '-',
-      image: (p.image as string) || '',
+      name: (p.name as string) || "Untitled Property",
+      type: (p.type as Property["type"]) || "Residential",
+      location: (p.location as string) || "Unknown",
+      size: (p.size as string) || "0 Sq. Yd.",
+      pricePerSqYd: (p.pricePerSqYd as string) || "-",
+      totalPrice: (p.totalPrice as string) || "-",
+      image: (p.image as string) || "",
       highlights: p.highlights || [],
-      description: (p.description as string) || '',
+      description: (p.description as string) || "",
     };
     list.unshift(next);
   }
@@ -54,25 +54,25 @@ export async function upsertProperty(p: Partial<Property> & { id?: string }): Pr
 }
 
 export async function deleteProperty(id: string): Promise<void> {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   const list = readRaw().filter((p) => p.id !== id);
   write(list);
   return Promise.resolve();
 }
 
 export async function markFeatured(id: string, featured = true): Promise<void> {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   const list = readRaw();
   const idx = list.findIndex((p) => p.id === id);
   if (idx !== -1) {
     // store featured flag on property as a custom field
-    // @ts-ignore
+    // @ts-expect-error - featured field is custom and not in type definition
     list[idx].featured = featured;
     write(list);
   }
 }
 
 export async function getLeads(): Promise<Awaited<ReturnType<typeof getStoredLeads>>> {
-  if (typeof window === 'undefined') return Promise.resolve([] as any);
+  if (typeof window === "undefined") return Promise.resolve([] as never[]);
   return Promise.resolve(getStoredLeads());
 }

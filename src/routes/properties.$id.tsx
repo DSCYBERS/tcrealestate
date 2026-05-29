@@ -14,7 +14,9 @@ export const Route = createFileRoute("/properties/$id")({
   head: ({ loaderData, params }) => {
     const p = loaderData?.property;
     const title = p ? `${p.name} — TC Real Estates` : "Property — TC Real Estates";
-    const desc = p ? `${p.name} in ${p.location} — ${p.size}. ${p.description}` : "Property details";
+    const desc = p
+      ? `${p.name} in ${p.location} — ${p.size}. ${p.description}`
+      : "Property details";
     return {
       meta: [
         { title },
@@ -27,23 +29,27 @@ export const Route = createFileRoute("/properties/$id")({
         ...(p ? [{ name: "twitter:image", content: p.image }] : []),
       ],
       links: [{ rel: "canonical", href: `/properties/${params.id}` }],
-      scripts: p ? [{
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: p.name,
-          description: p.description,
-          image: p.image,
-          category: p.type,
-          offers: {
-            "@type": "Offer",
-            priceCurrency: "INR",
-            price: p.totalPrice,
-            availability: "https://schema.org/InStock",
-          },
-        }),
-      }] : [],
+      scripts: p
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Product",
+                name: p.name,
+                description: p.description,
+                image: p.image,
+                category: p.type,
+                offers: {
+                  "@type": "Offer",
+                  priceCurrency: "INR",
+                  price: p.totalPrice,
+                  availability: "https://schema.org/InStock",
+                },
+              }),
+            },
+          ]
+        : [],
     };
   },
   notFoundComponent: () => (
@@ -51,8 +57,13 @@ export const Route = createFileRoute("/properties/$id")({
       <SiteHeader />
       <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
         <h1 className="text-3xl font-bold">Property not found</h1>
-        <p className="mt-2 text-muted-foreground">The listing you're looking for may have been removed.</p>
-        <Link to="/properties" className="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold">
+        <p className="mt-2 text-muted-foreground">
+          The listing you're looking for may have been removed.
+        </p>
+        <Link
+          to="/properties"
+          className="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold"
+        >
           View all properties
         </Link>
       </div>
@@ -68,15 +79,24 @@ function PropertyDetail() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <section className="max-w-7xl mx-auto px-6 py-8">
-        <Link to="/properties" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
+        <Link
+          to="/properties"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+        >
           <ArrowLeft className="w-4 h-4" /> Back to properties
         </Link>
 
         <div className="mt-6 grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <img src={p.image} alt={p.name} className="w-full h-72 md:h-96 object-cover rounded-xl" />
+            <img
+              src={p.image}
+              alt={p.name}
+              className="w-full h-72 md:h-96 object-cover rounded-xl"
+            />
             <div className="mt-6">
-              <div className="text-[11px] tracking-widest text-primary font-bold">{p.type.toUpperCase()}</div>
+              <div className="text-[11px] tracking-widest text-primary font-bold">
+                {p.type.toUpperCase()}
+              </div>
               <h1 className="mt-1 text-3xl md:text-4xl font-extrabold">{p.name}</h1>
               <p className="mt-2 text-muted-foreground flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-primary" /> {p.location}
@@ -106,10 +126,18 @@ function PropertyDetail() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={waLink(`Hi, I'm interested in ${p.name} (${p.location}).`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold">
+                <a
+                  href={waLink(`Hi, I'm interested in ${p.name} (${p.location}).`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold"
+                >
                   <MessageCircle className="w-4 h-4" /> WhatsApp Enquiry
                 </a>
-                <a href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 bg-brand-dark text-white px-5 py-3 rounded-md text-sm font-bold">
+                <a
+                  href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
+                  className="inline-flex items-center gap-2 bg-brand-dark text-white px-5 py-3 rounded-md text-sm font-bold"
+                >
                   <Phone className="w-4 h-4" /> Call Expert
                 </a>
               </div>
@@ -129,7 +157,9 @@ function PropertyDetail() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-card border border-border rounded-lg p-4">
-      <div className="text-[10px] tracking-widest text-muted-foreground font-semibold">{label.toUpperCase()}</div>
+      <div className="text-[10px] tracking-widest text-muted-foreground font-semibold">
+        {label.toUpperCase()}
+      </div>
       <div className="mt-1 font-bold">{value}</div>
     </div>
   );

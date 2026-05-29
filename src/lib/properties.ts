@@ -3,12 +3,7 @@ import plotChangodar from "@/assets/plot-changodar.jpg";
 import plotBavla from "@/assets/plot-bavla.jpg";
 import plotDholera from "@/assets/plot-dholera.jpg";
 
-export type PropertyType =
-  | "Residential"
-  | "Commercial"
-  | "Industrial"
-  | "Farmhouse"
-  | "Apartment";
+export type PropertyType = "Residential" | "Commercial" | "Industrial" | "Farmhouse" | "Apartment";
 
 export type Property = {
   id: string;
@@ -72,7 +67,12 @@ export const properties: Property[] = [
     pricePerSqYd: "19,500",
     totalPrice: "3.90 Cr",
     image: plotDholera,
-    highlights: ["Inside DSIR influence zone", "Smart City corridor", "Expressway connectivity", "High future appreciation"],
+    highlights: [
+      "Inside DSIR influence zone",
+      "Smart City corridor",
+      "Expressway connectivity",
+      "High future appreciation",
+    ],
     description:
       "Once-in-a-decade opportunity inside India's first greenfield smart city corridor — Dholera SIR.",
   },
@@ -99,8 +99,7 @@ export const properties: Property[] = [
     totalPrice: "1.85 Cr",
     image: plotChangodar,
     highlights: ["RERA approved", "Club house & pool", "24x7 security", "Premium fittings"],
-    description:
-      "Spacious 3BHK in a premium gated tower on SG Highway with world-class amenities.",
+    description: "Spacious 3BHK in a premium gated tower on SG Highway with world-class amenities.",
   },
 ];
 

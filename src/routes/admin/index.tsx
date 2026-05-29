@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { createFileRoute, Link } from '@tanstack/react-router';
+import React, { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/admin/')({ 
+export const Route = createFileRoute("/admin/")({
   component: AdminIndex,
 });
 
 function AdminIndex() {
-  const [loggedIn, setLoggedIn] = useState<boolean>(() => typeof window !== 'undefined' && !!localStorage.getItem('tc_admin_logged_in'));
+  const [loggedIn, setLoggedIn] = useState<boolean>(
+    () => typeof window !== "undefined" && !!localStorage.getItem("tc_admin_logged_in"),
+  );
 
   if (!loggedIn) {
     return <Login onSuccess={() => setLoggedIn(true)} />;
@@ -17,8 +19,12 @@ function AdminIndex() {
       <header className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <div>
-          <Link to="/admin/properties" className="mr-3 px-4 py-2 bg-primary text-white rounded">Properties</Link>
-          <Link to="/admin/leads" className="px-4 py-2 border rounded">Leads</Link>
+          <Link to="/admin/properties" className="mr-3 px-4 py-2 bg-primary text-white rounded">
+            Properties
+          </Link>
+          <Link to="/admin/leads" className="px-4 py-2 border rounded">
+            Leads
+          </Link>
         </div>
       </header>
 
@@ -32,25 +38,52 @@ function AdminIndex() {
 }
 
 function Login({ onSuccess }: { onSuccess: () => void }) {
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // simple local dev auth (change later for real auth)
-    if (password === 'adminpass') {
-      localStorage.setItem('tc_admin_logged_in', '1');
+    // Admin credentials
+    if (email === "admin@tcrealestate.in" && password === "7069tc06") {
+      localStorage.setItem("tc_admin_logged_in", "1");
       onSuccess();
     } else {
-      alert('Invalid password (use adminpass for local dev)');
+      alert("Invalid login credentials");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={submit} className="w-full max-w-sm bg-white p-6 rounded shadow">
-        <h2 className="text-lg font-bold mb-4">Admin Login</h2>
-        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" className="w-full border px-3 py-2 rounded mb-3" />
-        <button type="submit" className="w-full bg-primary text-white py-2 rounded">Sign in</button>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
+      <form onSubmit={submit} className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+        <div className="mb-4">
+          <label className="block text-sm font-semibold mb-2">Email</label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="admin@tcrealestate.in"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Enter password"
+            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-primary text-primary-foreground py-2 rounded-md font-semibold hover:opacity-90 transition"
+        >
+          Sign in
+        </button>
       </form>
     </div>
   );

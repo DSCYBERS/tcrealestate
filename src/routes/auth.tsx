@@ -77,14 +77,19 @@ function AuthPage() {
             {mode === "login" ? "Admin Login" : "Create Admin Account"}
           </h1>
           <p className="text-center text-sm text-muted-foreground mt-1">
-            {mode === "login" ? "Sign in to manage your website" : "First-time setup: create the admin@tcrealestate.in account"}
+            {mode === "login"
+              ? "Sign in to manage your website"
+              : "First-time setup: create the admin@tcrealestate.in account"}
           </p>
 
           <form onSubmit={submit} className="mt-6 space-y-3">
             <div className="relative">
               <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
-                type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@tcrealestate.in"
                 className="w-full border border-border rounded-md pl-10 pr-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
@@ -92,14 +97,18 @@ function AuthPage() {
             <div className="relative">
               <Lock className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
-                type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password (min 6 chars)"
                 className="w-full border border-border rounded-md pl-10 pr-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <button
-              type="submit" disabled={busy}
+              type="submit"
+              disabled={busy}
               className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-3 rounded-md hover:opacity-90 disabled:opacity-50"
             >
               {busy && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -107,14 +116,20 @@ function AuthPage() {
             </button>
           </form>
           <button
-            onClick={() => { setMode((m) => m === "login" ? "signup" : "login"); setError(null); }}
+            onClick={() => {
+              setMode((m) => (m === "login" ? "signup" : "login"));
+              setError(null);
+            }}
             className="mt-4 text-center text-sm text-muted-foreground hover:text-primary w-full"
           >
-            {mode === "login" ? "First time? Create the admin account" : "Already have an account? Sign in"}
+            {mode === "login"
+              ? "First time? Create the admin account"
+              : "Already have an account? Sign in"}
           </button>
         </div>
         <p className="text-center text-xs text-muted-foreground mt-6">
-          Use <strong>admin@tcrealestate.in</strong> — the admin role is granted automatically to this email on signup.
+          Use <strong>admin@tcrealestate.in</strong> — the admin role is granted automatically to
+          this email on signup.
         </p>
       </div>
     </div>

@@ -74,25 +74,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "TC Real Estates — Premium Plots in Ahmedabad" },
-      { name: "description", content: "Buy verified residential, commercial, industrial plots & farmhouses across Sanand, Changodar, Bavla and Dholera. Best deals before market." },
+      {
+        name: "description",
+        content:
+          "Buy verified residential, commercial, industrial plots & farmhouses across Sanand, Changodar, Bavla and Dholera. Best deals before market.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "TC Real Estates" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      { rel: "stylesheet", href: appCss },
+    links: [{ rel: "stylesheet", href: appCss }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RealEstateAgent",
+          name: "TC Real Estates",
+          areaServed: "Ahmedabad, Gujarat, India",
+          url: "https://tcrealestate.lovable.app/",
+          telephone: "+91-93137-87896",
+        }),
+      },
     ],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "RealEstateAgent",
-        name: "TC Real Estates",
-        areaServed: "Ahmedabad, Gujarat, India",
-        url: "https://tcrealestate.lovable.app/",
-        telephone: "+91-93137-87896",
-      }),
-    }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

@@ -1,5 +1,4 @@
-Deploying to Vercel
-===================
+# Deploying to Vercel
 
 This project is a static Vite site. The following steps prepare and deploy it to Vercel.
 
@@ -16,8 +15,8 @@ This project is a static Vite site. The following steps prepare and deploy it to
 
 4. Deploy. Vercel will build and publish. Preview deployments are created for branches.
 
-Local build & test
-------------------
+## Local build & test
+
 Build locally to verify before pushing:
 
 ```bash
@@ -26,8 +25,8 @@ npm run build
 npx serve dist # or any static server to test
 ```
 
-Notes
------
+## Notes
+
 - The site uses `vercel.json` for static build and to route all requests to `index.html` (SPA fallback).
 - For server-side notifications (email/WhatsApp), use Supabase Edge Functions or a serverless provider; cPanel is not suitable for serverless functions.
 - After deployment, add your production domain in Supabase Auth settings (allowed origins & redirect URIs).

@@ -32,21 +32,21 @@ export function useAuth(): AuthState {
     };
 
     // Subscribe FIRST, then check existing session
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (!mounted) return;
-        setState((s) => ({ ...s, session, user: session?.user ?? null }));
-        // Defer role lookup so we don't block the auth callback
-        if (session?.user) {
-          setTimeout(async () => {
-            const isAdmin = await loadRole(session.user.id);
-            if (mounted) setState((s) => ({ ...s, isAdmin, loading: false }));
-          }, 0);
-        } else {
-          setState((s) => ({ ...s, isAdmin: false, loading: false }));
-        }
-      },
-    );
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      setState((s) => ({ ...s, session, user: session?.user ?? null }));
+      // Defer role lookup so we don't block the auth callback
+      if (session?.user) {
+        setTimeout(async () => {
+          const isAdmin = await loadRole(session.user.id);
+          if (mounted) setState((s) => ({ ...s, isAdmin, loading: false }));
+        }, 0);
+      } else {
+        setState((s) => ({ ...s, isAdmin: false, loading: false }));
+      }
+    });
 
     supabase.auth.getSession().then(async ({ data }) => {
       if (!mounted) return;

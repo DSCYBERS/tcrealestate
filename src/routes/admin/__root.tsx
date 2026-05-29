@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import React from "react";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 
 function AdminShell() {
   return (

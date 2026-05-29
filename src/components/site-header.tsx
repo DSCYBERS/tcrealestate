@@ -10,10 +10,14 @@ function Logo({ light = false }: { light?: boolean }) {
         TC
       </div>
       <div className="flex flex-col leading-none">
-        <span className={`font-extrabold tracking-tight text-lg ${light ? "text-white" : "text-foreground"}`}>
+        <span
+          className={`font-extrabold tracking-tight text-lg ${light ? "text-white" : "text-foreground"}`}
+        >
           REAL <span className="text-primary">ESTATES</span>
         </span>
-        <span className={`mt-1 text-[9px] tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}>
+        <span
+          className={`mt-1 text-[9px] tracking-[0.18em] ${light ? "text-white/60" : "text-muted-foreground"}`}
+        >
           LAND. HOMES. INVESTMENTS.
         </span>
       </div>
