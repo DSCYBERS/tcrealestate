@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { getLeads } from "@/lib/adminStorage";
 
 export const Route = createFileRoute("/admin/leads")({
@@ -7,8 +7,23 @@ export const Route = createFileRoute("/admin/leads")({
 });
 
 function AdminLeads() {
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    const loggedIn = typeof window !== "undefined" && !!localStorage.getItem("tc_admin_logged_in");
+    if (!loggedIn) {
+      navigate({ to: "/admin" });
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [navigate]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   useEffect(() => {
     getLeads().then(setList);

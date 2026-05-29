@@ -18,13 +18,22 @@ function AdminIndex() {
     <div className="max-w-6xl mx-auto p-6">
       <header className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <div>
-          <Link to="/admin/properties" className="mr-3 px-4 py-2 bg-primary text-white rounded">
+        <div className="flex items-center gap-3">
+          <Link to="/admin/properties" className="px-4 py-2 bg-primary text-white rounded hover:opacity-90">
             Properties
           </Link>
-          <Link to="/admin/leads" className="px-4 py-2 border rounded">
+          <Link to="/admin/leads" className="px-4 py-2 border rounded hover:bg-gray-50">
             Leads
           </Link>
+          <button
+            onClick={() => {
+              localStorage.removeItem("tc_admin_logged_in");
+              setLoggedIn(false);
+            }}
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          >
+            Logout
+          </button>
         </div>
       </header>
 
