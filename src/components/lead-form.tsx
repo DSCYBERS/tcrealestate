@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { User, Phone, Lock, MessageCircle } from "lucide-react";
+import { User, Phone, Lock, MessageCircle, Loader2 } from "lucide-react";
+import { z } from "zod";
 import { waLink } from "@/lib/properties";
-import { saveLead } from "@/lib/leads";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const leadSchema = z.object({
+  name: z.string().trim().min(2, "Name is required").max(100),
+  phone: z.string().trim().min(7, "Valid phone required").max(20).regex(/^[+\d\s\-()]+$/, "Invalid phone"),
+  requirement: z.string().max(50).optional(),
+  location: z.string().max(50).optional(),
+});
 
 export function LeadForm({
   title = "GET BEST DEALS",
@@ -12,17 +21,31 @@ export function LeadForm({
   const [phone, setPhone] = useState("");
   const [req, setReq] = useState("");
   const [loc, setLoc] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    saveLead({
-      name: name.trim(),
-      phone: phone.trim(),
-      requirement: req,
-      location: loc,
-      source: defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
+    const parsed = leadSchema.safeParse({ name, phone, requirement: req, location: loc });
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0].message);
+      return;
+    }
+    setSubmitting(true);
+    const source = defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site");
+    const { error } = await supabase.from("leads").insert({
+      name: parsed.data.name,
+      phone: parsed.data.phone,
+      requirement: parsed.data.requirement || null,
+      location: parsed.data.location || null,
+      source,
     });
-    const msg = `Hi, I'm interested in TC Real Estates.${defaultPropertyId ? `\nProperty: ${defaultPropertyId}` : ""}\nName: ${name}\nPhone: ${phone}\nRequirement: ${req}\nLocation: ${loc}`;
+    setSubmitting(false);
+    if (error) {
+      toast.error("Could not submit. Please try WhatsApp instead.");
+    } else {
+      toast.success("Thanks! Our expert will reach you shortly.");
+    }
+    const msg = `Hi, I'm interested in TC Real Estates.${defaultPropertyId ? `\nProperty: ${defaultPropertyId}` : ""}\nName: ${parsed.data.name}\nPhone: ${parsed.data.phone}\nRequirement: ${req}\nLocation: ${loc}`;
     window.open(waLink(msg), "_blank");
   };
 
@@ -43,9 +66,10 @@ export function LeadForm({
         <Select placeholder="Preferred Location" value={loc} onChange={setLoc} options={["Sanand", "Changodar", "Bavla", "Dholera", "Narol", "SG Highway"]} />
         <button
           type="submit"
-          className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-3 rounded-md hover:opacity-90 tracking-wide"
+          disabled={submitting}
+          className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-3 rounded-md hover:opacity-90 tracking-wide disabled:opacity-60"
         >
-          <MessageCircle className="w-4 h-4" /> GET BEST DEALS
+          {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <MessageCircle className="w-4 h-4" />} GET BEST DEALS
         </button>
         <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
           <Lock className="w-3 h-3" /> 100% private — we never spam
