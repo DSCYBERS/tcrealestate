@@ -49,47 +49,58 @@ function AdminIndex() {
 function Login({ onSuccess }: { onSuccess: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     // Admin credentials
     if (email === "admin@tcrealestate.in" && password === "7069tc06") {
       localStorage.setItem("tc_admin_logged_in", "1");
       onSuccess();
     } else {
-      alert("Invalid login credentials");
+      setError("Invalid email or password");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
       <form onSubmit={submit} className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+        <h2 className="text-2xl font-bold mb-2 text-center text-foreground">Admin Login</h2>
+        <p className="text-center text-sm text-muted-foreground mb-6">
+          Email: admin@tcrealestate.in<br/>Password: 7069tc06
+        </p>
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 text-sm rounded-md">
+            {error}
+          </div>
+        )}
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Email</label>
+          <label className="block text-sm font-semibold mb-2 text-foreground">Email</label>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="admin@tcrealestate.in"
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full border-2 border-gray-300 rounded-md px-4 py-3 text-sm bg-white text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
             required
+            autoFocus
           />
         </div>
         <div className="mb-6">
-          <label className="block text-sm font-semibold mb-2">Password</label>
+          <label className="block text-sm font-semibold mb-2 text-foreground">Password</label>
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            placeholder="Enter password"
-            className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="7069tc06"
+            className="w-full border-2 border-gray-300 rounded-md px-4 py-3 text-sm bg-white text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-primary text-primary-foreground py-2 rounded-md font-semibold hover:opacity-90 transition"
+          className="w-full bg-primary text-primary-foreground py-3 rounded-md font-semibold hover:opacity-90 transition cursor-pointer"
         >
           Sign in
         </button>
