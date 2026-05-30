@@ -145,7 +145,12 @@ function PropertyDetail() {
           </div>
 
           <div className="lg:sticky lg:top-24 h-fit">
-            <LeadForm title="ENQUIRE ABOUT" subtitle="THIS PROPERTY" defaultPropertyId={p.id} />
+            <LeadForm 
+              title="ENQUIRE ABOUT" 
+              subtitle="THIS PROPERTY" 
+              defaultPropertyId={p.id}
+              defaultPropertyName={p.name}
+            />
           </div>
         </div>
       </section>

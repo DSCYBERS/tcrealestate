@@ -8,43 +8,81 @@ export function LeadForm({
   title = "GET BEST DEALS",
   subtitle = "BEFORE MARKET",
   defaultPropertyId,
+  defaultPropertyName,
 }: {
   title?: string;
   subtitle?: string;
   defaultPropertyId?: string;
+  defaultPropertyName?: string;
 }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [req, setReq] = useState("");
   const [loc, setLoc] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveLead({
+    if (!name.trim() || !phone.trim()) {
+      alert("Please fill in all required fields");
+      return;
+    }
+    
+    // Validate phone number (should be 10 digits for Indian numbers)
+    const phoneDigits = phone.replace(/\D/g, "");
+    if (phoneDigits.length < 10) {
+      alert("Please enter a valid phone number (at least 10 digits)");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    const leadData = {
       name: name.trim(),
       phone: phone.trim(),
       requirement: req,
       location: loc,
       source:
         defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
-    });
-    // also try to save to supabase when configured
+    };
+    
+    // Save lead locally
+    saveLead(leadData);
+    
+    // Try to save to supabase when configured
     try {
-      saveLeadToSupabase({
-        name: name.trim(),
-        phone: phone.trim(),
-        requirement: req,
-        location: loc,
-        source:
-          defaultPropertyId || (typeof window !== "undefined" ? window.location.pathname : "site"),
-      }).catch(() => {
+      saveLeadToSupabase(leadData).catch(() => {
         // Error saving to storage is non-critical
       });
     } catch {
-      // Error sending to WhatsApp is handled
+      // Error is handled
     }
-    const msg = `Hi, I'm interested in TC Real Estates.${defaultPropertyId ? `\nProperty: ${defaultPropertyId}` : ""}\nName: ${name}\nPhone: ${phone}\nRequirement: ${req}\nLocation: ${loc}`;
+    
+    // Build WhatsApp message with all details
+    let msg = `Hi, I'm interested in TC Real Estates.\n\n`;
+    if (defaultPropertyName) {
+      msg += `📍 *Property:* ${defaultPropertyName}`;
+      if (defaultPropertyId) msg += ` (ID: ${defaultPropertyId})`;
+      msg += `\n\n`;
+    }
+    msg += `*Your Details:*\n`;
+    msg += `• *Name:* ${name.trim()}\n`;
+    msg += `• *Phone:* ${phone.trim()}\n`;
+    if (req) msg += `• *Requirement:* ${req}\n`;
+    if (loc) msg += `• *Preferred Location:* ${loc}\n`;
+    msg += `\nPlease share details about this property and available options.`;
+    
+    // Open WhatsApp with the complete message
     window.open(waLink(msg), "_blank");
+    
+    // Reset form after submission
+    setTimeout(() => {
+      setName("");
+      setPhone("");
+      setReq("");
+      setLoc("");
+      setIsSubmitting(false);
+    }, 500);
   };
 
   return (
@@ -81,9 +119,10 @@ export function LeadForm({
         />
         <button
           type="submit"
-          className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-3 rounded-md hover:opacity-90 tracking-wide"
+          disabled={isSubmitting || !name.trim() || !phone.trim()}
+          className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-3 rounded-md hover:opacity-90 tracking-wide disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
         >
-          <MessageCircle className="w-4 h-4" /> GET BEST DEALS
+          <MessageCircle className="w-4 h-4" /> {isSubmitting ? "CONNECTING..." : "GET BEST DEALS"}
         </button>
         <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
           <Lock className="w-3 h-3" /> 100% private — we never spam
