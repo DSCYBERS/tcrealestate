@@ -31,6 +31,7 @@ const nav = [
   { to: "/properties", label: "Properties" },
   { to: "/investors", label: "Investors" },
   { to: "/contact", label: "Contact" },
+  { to: "/admin", label: "Admin" },
 ] as const;
 
 export function SiteHeader({ transparent = false }: { transparent?: boolean }) {

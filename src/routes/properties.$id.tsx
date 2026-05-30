@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { MapPin, CheckCircle2, ArrowLeft, MessageCircle, Phone } from "lucide-react";
+import { MapPin, CheckCircle2, ArrowLeft, MessageCircle, Phone, Award, Home, DollarSign, Ruler } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LeadForm } from "@/components/lead-form";
@@ -103,10 +103,10 @@ function PropertyDetail() {
               </p>
 
               <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <Stat label="Size" value={p.size} />
-                <Stat label="Type" value={p.type} />
-                <Stat label="Rate" value={p.pricePerSqYd === "—" ? "—" : `₹ ${p.pricePerSqYd}`} />
-                <Stat label="Total" value={`₹ ${p.totalPrice}`} />
+                <Stat icon={<Ruler className="w-4 h-4" />} label="Size" value={p.size} />
+                <Stat icon={<Home className="w-4 h-4" />} label="Type" value={p.type} />
+                <Stat icon={<DollarSign className="w-4 h-4" />} label="Rate" value={p.pricePerSqYd === "—" ? "—" : `₹ ${p.pricePerSqYd}`} />
+                <Stat icon={<Award className="w-4 h-4" />} label="Total" value={`₹ ${p.totalPrice}`} />
               </div>
 
               <div className="mt-8">
@@ -125,21 +125,26 @@ function PropertyDetail() {
                 </ul>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={waLink(`Hi, I'm interested in ${p.name} (${p.location}).`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold"
-                >
-                  <MessageCircle className="w-4 h-4" /> WhatsApp Enquiry
-                </a>
-                <a
-                  href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-2 bg-brand-dark text-white px-5 py-3 rounded-md text-sm font-bold"
-                >
-                  <Phone className="w-4 h-4" /> Call Expert
-                </a>
+              <div className="mt-8 space-y-4">
+                <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-4">
+                  <p className="text-sm text-foreground/70">Ready to invest? Get in touch with our experts today.</p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={waLink(`Hi, I'm interested in ${p.name} (${p.location}).`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-md text-sm font-bold hover:opacity-90 transition-opacity"
+                  >
+                    <MessageCircle className="w-4 h-4" /> WhatsApp Enquiry
+                  </a>
+                  <a
+                    href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-brand-dark text-white px-5 py-3 rounded-md text-sm font-bold hover:opacity-90 transition-opacity"
+                  >
+                    <Phone className="w-4 h-4" /> Call Expert
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -159,13 +164,16 @@ function PropertyDetail() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-card border border-border rounded-lg p-4">
-      <div className="text-[10px] tracking-widest text-muted-foreground font-semibold">
-        {label.toUpperCase()}
+    <div className="bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors">
+      <div className="flex items-center gap-2">
+        {icon && <div className="text-primary">{icon}</div>}
+        <div className="text-[10px] tracking-widest text-muted-foreground font-semibold">
+          {label.toUpperCase()}
+        </div>
       </div>
-      <div className="mt-1 font-bold">{value}</div>
+      <div className="mt-2 font-bold text-lg">{value}</div>
     </div>
   );
 }
