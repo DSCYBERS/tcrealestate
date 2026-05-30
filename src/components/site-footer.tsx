@@ -92,11 +92,11 @@ export function SiteFooter() {
         <FooterCol
           title="TOP LOCATIONS"
           items={[
-            { label: "Sanand", to: "/properties" },
-            { label: "Bavla", to: "/properties" },
-            { label: "Changodar", to: "/properties" },
-            { label: "Dholera", to: "/properties" },
-            { label: "Narol", to: "/properties" },
+            { label: "Zundal", to: "/properties" },
+            { label: "Vaishno Devi", to: "/properties" },
+            { label: "Chandkheda", to: "/properties" },
+            { label: "Jagatpur", to: "/properties" },
+            { label: "Motera", to: "/properties" },
           ]}
         />
         <div>

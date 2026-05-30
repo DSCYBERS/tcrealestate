@@ -77,7 +77,7 @@ export function LeadForm({
           placeholder="Preferred Location"
           value={loc}
           onChange={setLoc}
-          options={["Sanand", "Changodar", "Bavla", "Dholera", "Narol", "SG Highway"]}
+          options={["Zundal", "Vaishno Devi", "Chandkheda", "Jagatpur", "Motera"]}
         />
         <button
           type="submit"

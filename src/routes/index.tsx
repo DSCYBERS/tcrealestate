@@ -32,12 +32,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market. Contact TC Real Estates today.",
+          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Zundal, Vaishno Devi, Chandkheda, Jagatpur & Motera before market. Contact TC Real Estates today.",
       },
       {
         name: "keywords",
         content:
-          "plots in Ahmedabad, land for sale Ahmedabad, Sanand plots, Changodar property, Dholera investment, Bavla land, industrial plots Gujarat, TC Real Estates",
+          "plots in Ahmedabad, land for sale Ahmedabad, Zundal plots, Vaishno Devi property, Motera investment, Chandkheda land, industrial plots Gujarat, TC Real Estates",
       },
       {
         property: "og:title",
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market.",
+          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Zundal, Vaishno Devi, Chandkheda, Jagatpur & Motera before market.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://tcrealestate.lovable.app/" },
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Sanand, Changodar, Bavla, Dholera & Narol before market.",
+          "Discover verified, high-ROI residential, commercial & industrial plots in Ahmedabad. Best deals in Zundal, Vaishno Devi, Chandkheda, Jagatpur & Motera before market.",
       },
       { name: "twitter:image", content: "https://tcrealestate.lovable.app/og-home.jpg" },
     ],
@@ -293,7 +293,7 @@ function Index() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                q: "TC Real Estates helped me find the perfect plot in Sanand. Transparent deals and excellent support!",
+                q: "TC Real Estates helped me find the perfect plot in Zundal. Transparent deals and excellent support!",
                 n: "Rakesh Patel",
                 r: "Investor",
               },

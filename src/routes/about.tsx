@@ -49,8 +49,8 @@ function AboutPage() {
           </h2>
           <p className="mt-4 text-foreground/80 leading-relaxed">
             TC Real Estates was founded with a clear mission — to make property investment in
-            Ahmedabad simple, transparent and rewarding. From residential plots in Sanand to
-            industrial land in Changodar and once-in-a-decade opportunities in Dholera SIR, we
+            Ahmedabad simple, transparent and rewarding. From residential plots in Zundal to
+            commercial land in Vaishno Devi and premium opportunities in Motera, we
             hand-pick every listing.
           </p>
           <p className="mt-4 text-foreground/80 leading-relaxed">

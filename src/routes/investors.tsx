@@ -39,7 +39,7 @@ function InvestorsPage() {
             </h1>
             <p className="mt-4 text-white/80 max-w-xl">
               Access early-stage plot opportunities in Ahmedabad's fastest-appreciating corridors —
-              Sanand, Changodar, Bavla and Dholera SIR. Hand-picked, verified and ready for serious
+              Zundal, Vaishno Devi, Chandkheda and Jagatpur. Hand-picked, verified and ready for serious
               investors.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
